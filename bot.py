@@ -1,10 +1,8 @@
 import os
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
-from dotenv import load_dotenv
 
-load_dotenv()
-
+# Ətraf dəyişənlərini oxuyur (Replit-də Tools > Secrets vasitəsilə əlavə olunmalıdır)
 TOKEN = os.getenv("BOT_TOKEN")
 SECRET_PASSWORD = os.getenv("BOT_PASSWORD")
 GROUP_LINK = os.getenv("GROUP_LINK")
@@ -22,4 +20,5 @@ if __name__ == '__main__':
     app = ApplicationBuilder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    print("🤖 Bot polling başladı...")
     app.run_polling()
